@@ -12,15 +12,15 @@
             <h2>Admin Product Management Panel</h2>
             <a href="{{route('product.create')}}" class="btn btn-primary">New product</a>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped table-responsive-sm">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Update</th>
-                <th scope="col">Remove</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Remove</th>
+                </tr>
             </thead>
             <tbody>
             @foreach($products as $product)

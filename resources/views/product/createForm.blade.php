@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label for="price">Price: </label>
-                <input type="number" class="form-control" name="price" id="price">
+                <input type="text" class="form-control" name="price" id="price">
             </div>
 
             <input type="submit" class="btn btn-primary" value="Add new product">

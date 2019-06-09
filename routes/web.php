@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', 'ProductsController@index')->name('index');
+Route::get('/', 'HomeController@index')->name('index');
+Route::get('add-to-cart/{id}', 'ProductsController@addToCart')->name('product.addToCart');
+Route::get('cart', 'CartController@getCart')->name('cart.index');
+Route::delete('cart/remove-item/{id}', 'CartController@removeProduct')->name('cart.removeProduct');
+Route::post('cart/process-order', 'CartController@processOrder')->name('cart.processOrder');
+Route::get('cart/success', 'CartController@getSuccessPage')->name('cart.success');
 
 Route::group([
     'prefix' => 'admin',

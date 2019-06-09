@@ -2,25 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $products = Product::all();
-        if (Auth::check()) {
-            return redirect(route('admin.index'));
-        }
-        return view('product.index', ['products' => $products]);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -50,17 +38,6 @@ class ProductsController extends Controller
         if ($product) {
             return redirect(route('admin.index'))->with('success', 'Success! Product has beed added!');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -111,5 +88,23 @@ class ProductsController extends Controller
         if ($product) {
             return redirect(route('admin.index'))->with('success', "Success! Deleted!");
         }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addToCart(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+
+        $cart = new Cart($oldCart);
+        $cart->addProductToCart($product);
+
+        Session::put('cart', $cart);
+
+        return redirect(route('index'))->with('success', "You added $product->title to your Cart!");
     }
 }

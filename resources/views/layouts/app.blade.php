@@ -10,12 +10,15 @@
 <div class="wrapper">
     <div class="header">
         <div class="header-content">
-            <a href="{{route('index')}}"><h1>E-commerce app</h1></a>
+            <div class="header-logo-container">
+                <a href="{{route('index')}}"><h1 class="header-logo">E-commerce app</h1></a>
+            </div>
             <div class="header-links">
                 @if (Auth::check())
-                    <a href="{{route('logout')}}">Logout</a>
+                    <a href="{{route('logout')}}" class="header-link">Logout</a>
                 @else
-                    <a href="{{route('login')}}">Login</a>
+                    <p><a href="{{route('cart.index')}}" class="header-link">Your cart</a></p>
+                    <p><a href="{{route('login')}}" class="header-link">Login</a></p>
                 @endif
             </div>
         </div>
