@@ -3,6 +3,11 @@
 @section('content')
     <div>
         <h2>Your cart</h2>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger">{{ $error }}</div>
+            @endforeach
+        @endif
         @if (Session::has('cart'))
             <table class="table table-striped">
                 <thead>

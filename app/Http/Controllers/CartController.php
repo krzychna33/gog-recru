@@ -37,21 +37,24 @@ class CartController extends Controller
         return redirect(route('cart.index'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function processOrder(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
         $email = $request->get('email');
 
         $oderService = new ProcessOrderService($email);
         if ($oderService->processOder()) {
-            return redirect(route('cart.success'));
+            return view('cart.success', ['email' => $email]);
         }
         else {
             return redirect('cart.index');
         }
-    }
-
-    public function getSuccessPage()
-    {
-        return view('cart.success');
     }
 }
